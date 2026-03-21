@@ -2,30 +2,46 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Easy English Listening</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy English</title>
+
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f5f5f5;
+  background: linear-gradient(to bottom, #f0f4ff, #ffffff);
+  margin: 0;
 }
 
 .container {
-  margin-top: 100px;
+  margin-top: 80px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  color: #333;
 }
 
 .sentence {
-  font-size: 40px;
-  margin: 30px;
+  font-size: 48px;
+  margin: 40px 0;
+  color: #222;
+}
+
+.meaning {
+  font-size: 32px;
+  color: #666;
+  margin-top: 20px;
 }
 
 button {
-  font-size: 25px;
+  font-size: 26px;
   padding: 15px 25px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   border: none;
-  background-color: #4CAF50;
+  background-color: #5a8dee;
   color: white;
 }
 </style>
@@ -35,43 +51,67 @@ button {
 
 <div class="container">
   <h1>Easy English</h1>
-  
+
   <div class="sentence" id="sentence">
     I am going to the market.
   </div>
 
+  <div class="meaning" id="meaning"></div>
+
   <button onclick="speak()">🔊 듣기</button>
-  <button onclick="repeatSlow()">🐢 천천히</button>
-  <button onclick="nextSentence()">➡️ 다음</button>
+  <button onclick="slow()">🐢 천천히</button>
+  <button onclick="next()">➡️ 다음</button>
+  <button onclick="showMeaning()">📖 뜻</button>
 </div>
 
 <script>
 const sentences = [
   "I am going to the market.",
   "Can you help me?",
-  "I will call you later.",
   "Please speak slowly.",
-  "I understand a little."
+  "I understand a little.",
+  "I will call you later."
+];
+
+const meanings = [
+  "나는 시장에 가고 있어요.",
+  "저를 도와줄 수 있나요?",
+  "천천히 말해주세요.",
+  "나는 조금 이해해요.",
+  "나중에 전화할게요."
 ];
 
 let index = 0;
+let show = false;
 
 function speak() {
-  const utterance = new SpeechSynthesisUtterance(sentences[index]);
-  utterance.lang = "en-US";
-  speechSynthesis.speak(utterance);
+  let u = new SpeechSynthesisUtterance(sentences[index]);
+  u.lang = "en-US";
+  speechSynthesis.speak(u);
 }
 
-function repeatSlow() {
-  const utterance = new SpeechSynthesisUtterance(sentences[index]);
-  utterance.lang = "en-US";
-  utterance.rate = 0.6;
-  speechSynthesis.speak(utterance);
+function slow() {
+  let u = new SpeechSynthesisUtterance(sentences[index]);
+  u.lang = "en-US";
+  u.rate = 0.6;
+  speechSynthesis.speak(u);
 }
 
-function nextSentence() {
+function next() {
   index = (index + 1) % sentences.length;
   document.getElementById("sentence").innerText = sentences[index];
+  document.getElementById("meaning").innerText = "";
+  show = false;
+}
+
+function showMeaning() {
+  if (!show) {
+    document.getElementById("meaning").innerText = meanings[index];
+    show = true;
+  } else {
+    document.getElementById("meaning").innerText = "";
+    show = false;
+  }
 }
 </script>
 
