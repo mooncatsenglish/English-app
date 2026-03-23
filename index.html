@@ -94,10 +94,8 @@ let index = 0;
 let show = false;
 
 function speak() {
-  let u = new SpeechSynthesisUtterance(sentences[index]);
-  u.lang = "en-US";
-  speechSynthesis.speak(u);
-}
+  let audio = new Audio("s1.mp3"); audio.play();
+} 
 
 function slow() {
   let u = new SpeechSynthesisUtterance(sentences[index]);
