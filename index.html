@@ -92,10 +92,26 @@ const meanings = [
 
 let index = 0;
 let show = false;
+const audioFiles = [
+  "s1.mp3",
+  "s2.mp3",
+  "s3.mp3",
+  "s4.mp3",
+  "s5.mp3",
+  "s6.mp3",
+  "s7.mp3",
+  "s8.mp3",
+  "s9.mp3",
+  "s10.mp3"
+];
 
 function speak() {
-  let audio = new Audio("s1.mp3.mp3"); audio.play();
-} 
+  let audio = new Audio(audioFiles[index]);
+  audio.play();
+}
+
+  
+
 
 function slow() {
   let u = new SpeechSynthesisUtterance(sentences[index]);
