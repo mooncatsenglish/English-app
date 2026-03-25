@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 21 - Health</title>
+</head>
+
+<body style="font-size:28px; text-align:center; padding:30px;">
+
+  <h2>Unit 21 - Health</h2>
+
+  <div id="sentence">문장</div>
+  <br>
+  <div id="meaning">뜻</div>
+  <br><br>
+
+  <button onclick="speak()" style="font-size:25px;">🔊 듣기</button>
+  <button onclick="showMeaning()" style="font-size:25px;">📖 뜻</button>
+  <br><br>
+
+  <button onclick="prev()" style="font-size:25px;">⬅️ 이전</button>
+  <button onclick="next()" style="font-size:25px;">➡️ 다음</button>
+
+  <script>
+
+    const sentences = [
+      "I've got a sore throat and a temperature.",
+      "I've cut my arm. It's bleeding.",
+      "I've got a terrible cough.",
+      "I've got a headache.",
+      "I feel sick.",
+      "That sounds like flu. You should see a doctor.",
+      "Put a bandage round it.",
+      "Go to the chemist and get some cough medicine.",
+      "Take some tablets for the pain.",
+      "Go to the bathroom quickly."
+    ];
+
+    const meanings = [
+      "목이 아프고 열이 있어요.",
+      "팔을 베었어요. 피가 나요.",
+      "기침이 심해요.",
+      "두통이 있어요.",
+      "속이 안 좋아요.",
+      "독감 같네요. 병원에 가보세요.",
+      "붕대를 감으세요.",
+      "약국 가서 기침약 사세요.",
+      "진통제를 드세요.",
+      "빨리 화장실 가세요."
+    ];
+
+    const audioFiles = [
+      "u21_s1.mp3",
+      "u21_s2.mp3",
+      "u21_s3.mp3",
+      "u21_s4.mp3",
+      "u21_s5.mp3",
+      "u21_s6.mp3",
+      "u21_s7.mp3",
+      "u21_s8.mp3",
+      "u21_s9.mp3",
+      "u21_s10.mp3"
+    ];
+
+    let index = 0;
+    let currentAudio;
+
+    function showSentence() {
+      document.getElementById("sentence").innerText = sentences[index];
+      document.getElementById("meaning").innerText = "";
+    }
+
+    function showMeaning() {
+      document.getElementById("meaning").innerText = meanings[index];
+    }
+
+    function next() {
+      if (index < sentences.length - 1) {
+        index++;
+        showSentence();
+      }
+    }
+
+    function prev() {
+      if (index > 0) {
+        index--;
+        showSentence();
+      }
+    }
+
+    function speak() {
+      if (currentAudio) {
+        currentAudio.pause();
+      }
+      currentAudio = new Audio(audioFiles[index]);
+      currentAudio.play();
+    }
+
+    showSentence();
+
+  </script>
+
+</body>
+</html>
